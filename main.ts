@@ -7,7 +7,7 @@ basic.showString("F")
 basic.forever(function () {
     basic.showNumber(input.acceleration(Dimension.X))
     tilt = input.acceleration(Dimension.Y)
-    if (tilt > -800) {
+    if (tilt < -800) {
         direction = 1
         basic.showString("F")
     }
@@ -15,9 +15,11 @@ basic.forever(function () {
         direction = 3
         basic.showString("B")
     }
-    basic.pause(2000)
+    radio.sendNumber(direction)
+    basic.pause(500)
+    direction = 0
     LorR = input.acceleration(Dimension.X)
-    if (LorR > -800) {
+    if (LorR < -800) {
         direction = 4
         basic.showString("L")
     }
@@ -25,5 +27,7 @@ basic.forever(function () {
         direction = 3
         basic.showString("R")
     }
-    radio.sendNumber(direction)
+    radio.sendNumber(LorR)
+    basic.pause(500)
+    LorR = 0
 })
