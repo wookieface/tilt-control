@@ -2,8 +2,6 @@ input.onButtonPressed(Button.A, function () {
     if (start == 0) {
         setChannel += 1
         basic.showNumber(setChannel)
-    } else {
-    	
     }
 })
 input.onButtonPressed(Button.AB, function () {
@@ -27,7 +25,6 @@ start = 0
 basic.showIcon(IconNames.Square)
 let direction = 1
 radio.setTransmitPower(7)
-basic.showString("F")
 basic.forever(function () {
     if (start == 1) {
         tilt = input.acceleration(Dimension.Y)
