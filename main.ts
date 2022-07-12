@@ -1,27 +1,29 @@
-input.onButtonPressed(Button.A, function () {
-    direction += 1
-    if (direction == 1) {
-        basic.showString("F")
-    }
-    if (direction == 2) {
-        basic.showString("R")
-    }
-    if (direction == 3) {
-        basic.showString("B")
-    }
-    if (direction == 4) {
-        basic.showString("L")
-    }
-    if (direction > 4) {
-        direction = 1
-        basic.showString("F")
-    }
-})
-input.onGesture(Gesture.Shake, function () {
-    radio.sendNumber(direction)
-})
-let direction = 0
-direction = 1
+let LorR = 0
+let tilt = 0
+let direction = 1
 radio.setTransmitPower(7)
 radio.setGroup(10)
 basic.showString("F")
+basic.forever(function () {
+    basic.showNumber(input.acceleration(Dimension.X))
+    tilt = input.acceleration(Dimension.Y)
+    if (tilt > -800) {
+        direction = 1
+        basic.showString("F")
+    }
+    if (tilt > 800) {
+        direction = 3
+        basic.showString("B")
+    }
+    basic.pause(2000)
+    LorR = input.acceleration(Dimension.X)
+    if (LorR > -800) {
+        direction = 4
+        basic.showString("L")
+    }
+    if (LorR > 800) {
+        direction = 3
+        basic.showString("R")
+    }
+    radio.sendNumber(direction)
+})
